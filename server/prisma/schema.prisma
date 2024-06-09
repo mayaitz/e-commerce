@@ -78,7 +78,7 @@ model OrderItem {
   product Product @relation(fields: [productID], references: [id])
   productID Int
   quantity Int
-  note String
+  note String?
 
   @@id([orderID, productID])
 }
@@ -89,7 +89,7 @@ model CartItem {
   product Product @relation(fields: [productID], references: [id])
   productID Int
   quantity Int
-  note String
+  note String?
 
   @@id([userID, productID])
 }

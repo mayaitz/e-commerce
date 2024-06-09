@@ -12,3 +12,84 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id     Int     @id @default(autoincrement())
+  firstName String @db.VarChar(50)
+  lastName String @db.VarChar(50)
+  creditCards CreditCard[]
+  addresses Address[]
+  email String @unique
+  phoneNumber Int?
+  password String 
+  orders Order[]
+  cartItems CartItem[]
+}
+
+model Address {
+  id     Int     @id @default(autoincrement())
+  country String
+  city String
+  street String
+  houseNumber Int
+  floor Int?
+  apartment Int?
+  user User @relation(fields: [userID], references: [id])
+  userID Int
+}
+
+model CreditCard {
+  id     Int     @id @default(autoincrement())
+  cvc Int @db.SmallInt
+  creditNumber Int
+  experationDate DateTime
+  user User @relation(fields: [userID], references: [id])
+  userID Int
+}
+
+model Order {
+  id     Int     @id @default(autoincrement())
+  date DateTime  @default(now())
+  buyer User @relation(fields: [buyerID], references:[id])
+  buyerID Int
+  status Status @default(preparing)
+  items OrderItem[]
+}
+
+enum Status {
+  preparing
+  readyForDelivery
+  delivering
+  reachedDestination
+}
+
+model Product {
+  id     Int     @id @default(autoincrement())
+  stock Int
+  price Float
+  description String
+  orderItems OrderItem[]
+  cartItems CartItem[]
+}
+
+model OrderItem {
+  order Order @relation(fields: [orderID], references: [id])
+  orderID Int
+  product Product @relation(fields: [productID], references: [id])
+  productID Int
+  quantity Int
+  note String
+
+  @@id([orderID, productID])
+}
+
+model CartItem {
+  user User @relation(fields: [userID], references: [id])
+  userID Int
+  product Product @relation(fields: [productID], references: [id])
+  productID Int
+  quantity Int
+  note String
+
+  @@id([userID, productID])
+}

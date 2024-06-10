@@ -3,46 +3,46 @@ import service from "../Services/OrderService";
 import { Status } from "@prisma/client";
 
 export default {
-  createOrder: (req: Request, res: Response) => {
+  createOrder: async (req: Request, res: Response) => {
     try {
-      service.createOrder(req.body.userID);
-      res.send("order created").status(201);
+      await service.createOrder(req.body.userID);
+      res.status(201).send("order created");
     } catch (error) {
-      res.send("error while creating order").status(400);
+      res.status(400).send("error while creating order");
     }
   },
 
-  getDetailedOrder: (req: Request, res: Response) => {
+  getDetailedOrder: async (req: Request, res: Response) => {
     try {
-      res.send(service.getDetailedOrder(+req.params.orderID)).status(200);
+      res.status(200).send(await service.getDetailedOrder(+req.params.orderID));
     } catch (error) {
-      res.send("not found").status(404);
+      res.status(404).send("not found");
     }
   },
 
-  retreiveOrder: (req: Request, res: Response) => {
+  retreiveOrder: async (req: Request, res: Response) => {
     try {
-      service.retreiveOrder(+req.params.orderID);
-      res.send("deleted.").status(200);
+      await service.retreiveOrder(+req.params.orderID);
+      res.status(200).send("deleted.");
     } catch (error) {
-      res.send("not found").status(404);
+      res.status(404).send("not found");
     }
   },
 
-  getOrderStatus: (req: Request, res: Response) => {
+  getOrderStatus: async (req: Request, res: Response) => {
     try {
-      res.send(service.getOrderStatus(+req.params.orderID)).status(200);
+      res.status(200).send(await service.getOrderStatus(+req.params.orderID));
     } catch (error) {
-      res.send("not found").status(404);
+      res.status(404).send("not found");
     }
   },
 
-  updateOrderStatus: (req: Request, res: Response) => {
+  updateOrderStatus: async (req: Request, res: Response) => {
     try {
-      service.updateOrderStatus(+req.params.orderID, <Status>req.params.status);
-      res.send("updated successfully").status(200);
+      await service.updateOrderStatus(+req.params.orderID, <Status>req.params.status);
+      res.status(200).send("updated successfully");
     } catch (error) {
-      res.send("error").status(404);
+      res.status(404).send("error");
     }
   },
 };

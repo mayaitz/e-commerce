@@ -1,16 +1,16 @@
-import express from "express";
+import express, { Request, Response } from "express";
 const router = express.Router();
 
-router.post("/register", (req, res) => {});
-router.get("/login", (req, res) => {});
-router.patch("/:userID/edit", (req, res) => {});
-router.get("/:userID/orders", (req, res) => {});
-router.get("/cart", (req, res) => {});
-router.post("/cart", (req, res) => {});
-router.delete("/cart/:itemID", (req, res) => {});
-router.post("/:userID/credit", (req, res) => {});
-router.post("/:userID/address", (req, res) => {});
-router.delete("/userID/credit", (req, res) => {});
-router.delete("/userID/address", (req, res) => {});
+router.post("/register", (req: Request, res: Response) => {});
+router.get("/login", (req: Request, res: Response) => {});
+router.patch("/:userID/edit", (req: Request, res: Response) => {});
+router.get("/:userID/orders", (req: Request, res: Response) => {});
+router.get("/cart", (req: Request, res: Response) => {});
+router.post("/cart", (req: Request, res: Response) => {});
+router.delete("/cart/:itemID", (req: Request, res: Response) => {});
+router.post("/:userID/credit", (req: Request, res: Response) => {});
+router.post("/:userID/address", (req: Request, res: Response) => {});
+router.delete("/userID/credit", (req: Request, res: Response) => {});
+router.delete("/userID/address", (req: Request, res: Response) => {});
 
 export default router;

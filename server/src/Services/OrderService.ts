@@ -32,7 +32,7 @@ export default {
   },
 
   getDetailedOrder: async (orderID: number) => {
-    return await prisma.order.findUnique({
+    return await prisma.order.findUniqueOrThrow({
       where: {
         id: orderID,
       },
@@ -50,7 +50,7 @@ export default {
   },
 
   getOrderStatus: async (orderID: number) => {
-    return await prisma.order.findUnique({
+    return await prisma.order.findUniqueOrThrow({
       where: {
         id: orderID,
       },

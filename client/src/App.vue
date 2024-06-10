@@ -1,18 +1,19 @@
 <template>
   <div id="app">
-    <Navbar/>
+    <nav>
+      <navbar-vue></navbar-vue>
+    </nav>
+    <router-view />
   </div>
 </template>
-
 <script>
-import Navbar from './components/Navbar.vue'
+import NavbarVue from "./components/Navbar.vue";
 
 export default {
-  name: 'App',
   components: {
-    Navbar
-  }
-}
+    NavbarVue,
+  },
+};
 </script>
 
 <style>
@@ -22,6 +23,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: rgb(181, 248, 226);
 }
 </style>

@@ -4,7 +4,7 @@
       <img
         src="https://www.freeiconspng.com/thumbs/pen-png/pen-in-hand-png-9.png"
       />
-      <a class="navbar-brand" href="#">Shopen</a>
+      <router-link to="/">Shopen</router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -20,9 +20,8 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 
         <div class="navbar-nav">
-          <a class="nav-link" href="#">register</a>
-          <a class="nav-link" href="#">login</a>
-          <font-awesome-icon icon="fa-regular fa-user" />
+          <router-link to="/register">Register</router-link>
+          <router-link to="/login">Login</router-link>
         </div>
       </div>
     </div>
@@ -41,5 +40,15 @@ img {
   width: 3rem;
   height: 4rem;
   margin-right: 1rem;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0.5rem;
+}
+
+nav a.router-link-exact-active {
+  color: #000000;
 }
 </style>

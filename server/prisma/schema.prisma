@@ -18,9 +18,7 @@ model User {
   firstName String @db.VarChar(50)
   lastName String @db.VarChar(50)
   creditCard CreditCard?
-  creditID Int 
   address Address?
-  addressID Int
   email String @unique
   phoneNumber Int?
   password String 
@@ -44,7 +42,7 @@ model Address {
 model CreditCard {
   id     Int     @id @default(autoincrement())
   cvc Int @db.SmallInt
-  creditNumber Int
+  creditNumber BigInt
   experationDate DateTime
   user User @relation(fields: [userID], references: [id], onDelete: Cascade) 
   userID Int @unique

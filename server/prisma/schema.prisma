@@ -17,13 +17,16 @@ model User {
   id     Int     @id @default(autoincrement())
   firstName String @db.VarChar(50)
   lastName String @db.VarChar(50)
-  creditCards CreditCard[]
-  addresses Address[]
+  creditCard CreditCard?
+  creditID Int 
+  address Address?
+  addressID Int
   email String @unique
   phoneNumber Int?
   password String 
   orders Order[]
   cartItems CartItem[]
+  profileURL String?
 }
 
 model Address {
@@ -34,8 +37,8 @@ model Address {
   houseNumber Int
   floor Int?
   apartment Int?
-  user User @relation(fields: [userID], references: [id])
-  userID Int
+  user User @relation(fields: [userID], references: [id], onDelete: Cascade) 
+  userID Int @unique
 }
 
 model CreditCard {
@@ -43,8 +46,8 @@ model CreditCard {
   cvc Int @db.SmallInt
   creditNumber Int
   experationDate DateTime
-  user User @relation(fields: [userID], references: [id])
-  userID Int
+  user User @relation(fields: [userID], references: [id], onDelete: Cascade) 
+  userID Int @unique
 }
 
 model Order {
@@ -65,17 +68,19 @@ enum Status {
 
 model Product {
   id     Int     @id @default(autoincrement())
+  title String @db.VarChar(100)
   stock Int
   price Float
   description String
+  imageURL String
   orderItems OrderItem[]
   cartItems CartItem[]
 }
 
 model OrderItem {
-  order Order @relation(fields: [orderID], references: [id])
+  order Order @relation(fields: [orderID], references: [id], onDelete: Cascade)
   orderID Int
-  product Product @relation(fields: [productID], references: [id])
+  product Product @relation(fields: [productID], references: [id], onDelete: Cascade)
   productID Int
   quantity Int
   note String?
@@ -84,9 +89,9 @@ model OrderItem {
 }
 
 model CartItem {
-  user User @relation(fields: [userID], references: [id])
+  user User @relation(fields: [userID], references: [id], onDelete: Cascade)
   userID Int
-  product Product @relation(fields: [productID], references: [id])
+  product Product @relation(fields: [productID], references: [id], onDelete: Cascade)
   productID Int
   quantity Int
   note String?

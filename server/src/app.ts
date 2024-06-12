@@ -3,9 +3,13 @@ import userRouter from "./Routes/UserRouter";
 import orderRouter from "./Routes/OrderRouter";
 import productRouter from "./Routes/ProductRouter";
 import { errorHandler } from "./Middlewares/ErrorHandler";
+import bodyParser from "body-parser";
 
 const app = express();
 const port = 8000;
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use("/users", userRouter);
 app.use("/orders", orderRouter);

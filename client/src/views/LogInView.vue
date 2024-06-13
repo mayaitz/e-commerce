@@ -57,7 +57,6 @@ export default {
         );
         if (response.status == 200) {
           this.setUser(response.data);
-          console.log(response.data.id);
           router.push("/");
         } else {
           this.isValid = false;

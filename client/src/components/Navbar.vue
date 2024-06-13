@@ -19,18 +19,38 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 
-        <div class="navbar-nav">
+        <a href="" v-if="userConnected" @click="clearUser">
+          <font-awesome-icon :icon="['fas', 'arrow-right-from-bracket']" />
+        </a>
+        <div class="navbar-nav" v-else>
           <router-link to="/register">Register</router-link>
           <router-link to="/login">Login</router-link>
         </div>
+        <img :src="imageURL" id="profile" />
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "NavBar",
+  computed: {
+    ...mapGetters(["getUser"]),
+    userConnected() {
+      return this.getUser.id;
+    },
+    imageURL() {
+      return (
+        this.getUser.profileURL ||
+        "https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png"
+      );
+    },
+  },
+  methods: {
+    ...mapActions(["clearUser"]),
+  },
 };
 </script>
 
@@ -50,5 +70,19 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #000000;
+}
+
+svg {
+  color: black;
+  width: 2rem;
+  height: 2rem;
+  margin: 1rem;
+}
+
+#profile {
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  margin: 0%;
 }
 </style>

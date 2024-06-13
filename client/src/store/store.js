@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: null,
+    user: {},
   },
   getters: {
     getUser: (state) => state.user,
@@ -15,7 +15,7 @@ export default new Vuex.Store({
       state.user = user;
     },
     CLEAR_USER(state) {
-      state.user = null;
+      state.user = {};
     },
   },
   actions: {

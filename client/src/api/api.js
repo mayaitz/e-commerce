@@ -1,7 +1,11 @@
 import axios from "./axiosInstance";
 
 const ApiService = {
-  Products: {},
+  Products: {
+    async fetchProducts() {
+      return axios.get("/products/");
+    },
+  },
   Users: {
     async login(email, password) {
       return axios.post("/users/login", { email, password });
@@ -43,6 +47,13 @@ const ApiService = {
         password,
       };
       return await axios.post("/users/register", user);
+    },
+    async addToCart(productID, userID) {
+      const quantity = 1;
+      return axios.post("/users/cart", { productID, quantity, userID });
+    },
+    async removeFromCart(productID, userID) {
+      return axios.delete(`/users/${userID}/cart/${productID}`);
     },
   },
   Orders: {},

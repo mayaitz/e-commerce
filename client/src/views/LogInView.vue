@@ -21,7 +21,7 @@
           id="password"
           v-model="password"
           class="form-control"
-          :class="{ 'is-invalid': email == '' }"
+          :class="{ 'is-invalid': password == '' }"
         />
       </div>
       <button type="submit" class="btn btn-info mt-5">Submit</button>
@@ -33,6 +33,9 @@
 </template>
 
 <script>
+import { ApiService } from "@/api/api";
+import router from "@/router/routes";
+
 export default {
   data() {
     return {
@@ -42,12 +45,15 @@ export default {
     };
   },
   methods: {
-    login() {
+    async login() {
       if (this.email === "" || this.password === "") {
         this.isValid = false;
       } else {
-        if (1 == this.isValid) {
-          console.log("Login successful");
+        if (
+          (await ApiService.Users.login(this.email, this.password)).status ==
+          200
+        ) {
+          router.push("/");
         } else {
           this.isValid = false;
         }

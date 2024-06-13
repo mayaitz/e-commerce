@@ -35,6 +35,7 @@
 <script>
 import { ApiService } from "@/api/api";
 import router from "@/router/routes";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -45,14 +46,18 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["setUser"]),
     async login() {
       if (this.email === "" || this.password === "") {
         this.isValid = false;
       } else {
-        if (
-          (await ApiService.Users.login(this.email, this.password)).status ==
-          200
-        ) {
+        const response = await ApiService.Users.login(
+          this.email,
+          this.password
+        );
+        if (response.status == 200) {
+          this.setUser(response.data);
+          console.log(response.data.id);
           router.push("/");
         } else {
           this.isValid = false;

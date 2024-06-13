@@ -170,6 +170,7 @@
 <script>
 import { ApiService } from "@/api/api";
 import router from "@/router/routes";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -193,6 +194,7 @@ export default {
   },
 
   methods: {
+    ...mapActions["setUser"],
     castToNumber(stg) {
       if (stg == "") {
         return null;
@@ -202,7 +204,7 @@ export default {
     },
 
     async register() {
-      const status = (
+      const response = (
         await ApiService.Users.register(
           this.firstName,
           this.lastName,
@@ -220,8 +222,8 @@ export default {
           this.castToNumber(this.apartment)
         )
       ).status;
-      if (status == 201) {
-        console.log("register successful");
+      if (response.status == 201) {
+        this.setUser(response.data);
         router.push("/");
       } else {
         this.isValid = false;

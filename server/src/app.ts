@@ -4,12 +4,16 @@ import orderRouter from "./Routes/OrderRouter";
 import productRouter from "./Routes/ProductRouter";
 import { errorHandler } from "./Middlewares/ErrorHandler";
 import bodyParser from "body-parser";
+import * as cors from "cors";
 
 const app = express();
 const port = 8000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors.default({
+  origin: 'http://localhost:8080'
+}));
 
 app.use("/users", userRouter);
 app.use("/orders", orderRouter);

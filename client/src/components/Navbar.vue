@@ -19,7 +19,7 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 
-        <a href="" v-if="userConnected" @click="clearUser">
+        <a href="" v-if="userConnected" @click="logout">
           <font-awesome-icon :icon="['fas', 'arrow-right-from-bracket']" />
         </a>
         <div class="navbar-nav" v-else>
@@ -49,7 +49,11 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["clearUser"]),
+    ...mapActions(["clearUser", "clearCart"]),
+    logout() {
+      this.clearUser();
+      this.clearCart();
+    },
   },
 };
 </script>

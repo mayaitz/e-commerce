@@ -4,7 +4,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ title }}</h5>
       <p class="card-text">{{ description }}</p>
-      <a v-if="isInCart" @click="$emit('addToCart')" class="btn btn-warning"
+      <a v-if="!isInCart" @click="$emit('addToCart')" class="btn btn-warning"
         >add to cart</a
       ><a v-else @click="$emit('removeFromCart')" class="btn btn-warning"
         >remove from cart</a
@@ -14,8 +14,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  props: ["image", "title", "description", "isInCart"],
+  props: ["id", "image", "title", "description"],
+  computed: {
+    ...mapGetters(["getCart"]),
+    isInCart() {
+      return this.getCart.includes(this.id);
+    },
+  },
 };
 </script>
 

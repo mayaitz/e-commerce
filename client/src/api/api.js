@@ -48,6 +48,9 @@ const ApiService = {
       };
       return await axios.post("/users/register", user);
     },
+    async getCart(userID) {
+      return axios.get(`/users/${userID}/cart`);
+    },
     async addToCart(productID, userID) {
       const quantity = 1;
       return axios.post("/users/cart", { productID, quantity, userID });

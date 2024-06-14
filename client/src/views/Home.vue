@@ -3,12 +3,12 @@
     <div class="d-flex" v-for="product in products" :key="product.id">
       <product-card-vue
         class="p-2 flex-fill"
+        :id="product.id"
         :image="product.imageURL"
         :title="product.title"
         :description="product.description"
-        :is-in-cart="isInCart"
-        @addToCart="addToCart(product.id)"
-        @removeFromCart="removeFromCart(productID)"
+        @addToCart="addToCartEvent(product.id)"
+        @removeFromCart="removeFromCartEvent(product.id)"
       ></product-card-vue>
     </div>
   </div>
@@ -17,7 +17,7 @@
 <script>
 import { ApiService } from "@/api/api";
 import ProductCardVue from "@/components/ProductCard.vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 // @ is an alias to /src
 
 export default {
@@ -37,10 +37,13 @@ export default {
     ...mapGetters(["getUser"]),
   },
   methods: {
-    addToCart(productID) {
+    ...mapActions(["addToCart", "removeFromCart"]),
+    addToCartEvent(productID) {
+      this.addToCart(productID);
       ApiService.Users.addToCart(productID, this.getUser.id);
     },
-    removeFromCart(productID) {
+    removeFromCartEvent(productID) {
+      this.removeFromCart(productID);
       ApiService.Users.removeFromCart(productID, this.getUser.id);
     },
   },

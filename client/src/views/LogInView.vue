@@ -46,7 +46,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setUser"]),
+    ...mapActions(["setUser", "setCart"]),
     async login() {
       if (this.email === "" || this.password === "") {
         this.isValid = false;
@@ -58,6 +58,7 @@ export default {
         if (response.status == 200) {
           this.setUser(response.data);
           router.push("/");
+          this.setCart(await ApiService.Users.getCart(response.data.id));
         } else {
           this.isValid = false;
         }

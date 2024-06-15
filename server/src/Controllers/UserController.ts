@@ -84,7 +84,7 @@ export default {
     next: NextFunction
   ) => {
     try {
-      await service.deleteCartItem(+req.params.productID, +req.params.userID);
+      await service.deleteCartItem(+req.params.itemID, +req.params.userID);
       res.status(200).send("product removed from cart successfully.");
     } catch (error) {
       if (error instanceof Error)

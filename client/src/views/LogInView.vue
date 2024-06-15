@@ -58,7 +58,9 @@ export default {
         if (response.status == 200) {
           this.setUser(response.data);
           router.push("/");
-          this.setCart(await ApiService.Users.getCart(response.data.id));
+          this.setCart(
+            (await ApiService.Users.getCart(response.data.id)).data.cartItems
+          );
         } else {
           this.isValid = false;
         }

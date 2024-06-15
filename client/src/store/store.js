@@ -40,7 +40,10 @@ export default new Vuex.Store({
       commit("CLEAR_USER");
     },
     setCart({ commit }, cart) {
-      commit("SET_CART", cart);
+      commit(
+        "SET_CART",
+        cart.map((item) => item.productID)
+      );
     },
     clearCart({ commit }) {
       commit("CLEAR_CART");

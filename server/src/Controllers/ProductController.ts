@@ -77,7 +77,6 @@ export default {
   },
 
   addProduct: async (req: Request, res: Response, next: NextFunction) => {
-      console.log(req.body);
     try {
       await service.addProduct(req.body);
       res.status(201).send("product created successfully.");

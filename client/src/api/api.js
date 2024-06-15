@@ -5,6 +5,9 @@ const ApiService = {
     async fetchProducts() {
       return axios.get("/products/");
     },
+    async fetchProductByID(productID) {
+      return axios.get(`/products/${productID}`);
+    },
   },
   Users: {
     async login(email, password) {
@@ -59,6 +62,10 @@ const ApiService = {
       return axios.delete(`/users/${userID}/cart/${productID}`);
     },
   },
-  Orders: {},
+  Orders: {
+    async newOrder(userID) {
+      return axios.post(`/orders/`, { userID });
+    },
+  },
 };
 export { ApiService };

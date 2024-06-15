@@ -19,6 +19,9 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 
+        <router-link to="/cart" v-if="userConnected">
+          <font-awesome-icon :icon="['fas', 'fa-cart-shopping']"
+        /></router-link>
         <a href="" v-if="userConnected" @click="logout">
           <font-awesome-icon :icon="['fas', 'arrow-right-from-bracket']" />
         </a>

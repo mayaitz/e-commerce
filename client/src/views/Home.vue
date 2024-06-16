@@ -9,6 +9,8 @@
         :id="product.id"
         :image="product.imageURL"
         :title="product.title"
+        :price="product.price"
+        :stock="product.stock"
         :description="product.description"
         @addToCart="addToCartEvent(product.id)"
         @removeFromCart="removeFromCartEvent(product.id)"
@@ -52,6 +54,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-</style>

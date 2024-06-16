@@ -3,8 +3,16 @@
     <img :src="image" class="card-img-top" />
     <div class="card-body">
       <h5 class="card-title">{{ title }}</h5>
-      <p class="card-text">{{ description }}</p>
-      <a v-if="!isInCart" @click="$emit('addToCart')" class="btn btn-warning"
+      <p class="card-text">{{ description }} <br /></p>
+      <div>
+        price: {{ price }}$ <br />
+        <small class="text-muted">stock: {{ stock }}</small>
+      </div>
+      <a
+        v-if="!isInCart"
+        @click="$emit('addToCart')"
+        class="btn btn-warning"
+        :class="{ disabled: !isUserConnected }"
         >add to cart</a
       ><a v-else @click="$emit('removeFromCart')" class="btn btn-warning"
         >remove from cart</a
@@ -17,11 +25,14 @@
 import { mapGetters } from "vuex";
 
 export default {
-  props: ["id", "image", "title", "description"],
+  props: ["id", "image", "title", "description", "stock", "price"],
   computed: {
-    ...mapGetters(["getCart"]),
+    ...mapGetters(["getCart", "getUser"]),
     isInCart() {
       return this.getCart.includes(this.id);
+    },
+    isUserConnected() {
+      return this.getUser.id;
     },
   },
 };

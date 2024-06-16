@@ -1,8 +1,11 @@
 <template>
-  <div>
-    <div class="d-flex" v-for="product in products" :key="product.id">
+  <div class="row">
+    <div
+      class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-xs-12"
+      v-for="product in products"
+      :key="product.id"
+    >
       <product-card-vue
-        class="p-2 flex-fill"
         :id="product.id"
         :image="product.imageURL"
         :title="product.title"
@@ -49,3 +52,6 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+</style>

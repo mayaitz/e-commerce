@@ -1,5 +1,5 @@
 <template>
-  <div class="card" style="width: 18rem">
+  <div class="card mx-auto" style="width: 17rem; height: 420px">
     <img :src="image" class="card-img-top" />
     <div class="card-body">
       <h5 class="card-title">{{ title }}</h5>
@@ -40,11 +40,11 @@ export default {
 
 <style>
 .card {
-  margin: 3rem;
+  margin-top: 3rem;
   max-width: 300px;
 }
 
 img {
-  max-height: 200px;
+  height: 200px;
 }
 </style>

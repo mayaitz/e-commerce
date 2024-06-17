@@ -54,3 +54,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+.row {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-bottom: 2rem;
+}
+</style>
